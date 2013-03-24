@@ -8,7 +8,7 @@ $url = "http://www.google.com/";
 $_ = $ENV{"QUERY_STRING"};
 s@^g(oogle)?:@@ && s@^//@@ && s@/$@@;
 if ($_) {
-	s/\+/ /g;
+	s/%0C/ /g;
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;
 	s/[\000-\040\+:#?&%<>"\177-\377]/sprintf('%%%02X', unpack('C', $&))/eg;
 	$url .= "search?q=$_&hl=ja&lr=lang_ja&ie=EUC-JP";

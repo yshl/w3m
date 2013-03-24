@@ -22,7 +22,7 @@ s@^[ewjs]:@@ && s@^//@@ && s@/$@@;
 if ($_) {
 	s/\+/ /g;
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;
-	$_ = nkf("-e", $_);
+	$_ = nkf("-u", $_);
 	s/[\000-\040\+:#?&%<>"\177-\377]/sprintf('%%%02X', unpack('C', $&))/eg;
 	$url .= "/search.php?MT=$_&kind=$kind&mode=$mode";
 } else {

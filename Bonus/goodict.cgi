@@ -5,7 +5,9 @@
 # w:      file:/cgi-bin/goodict.cgi?%s
 # j:      file:/cgi-bin/goodict.cgi?%s
 
-use NKF;
+use Encode;
+use Encode::Guess qw/euc-jp utf8/;
+
 #$mode = 0; # substring
 $mode = 1;  # perfect match
 #$mode = 3; # search body text
@@ -22,7 +24,7 @@ s@^[ewjs]:@@ && s@^//@@ && s@/$@@;
 if ($_) {
 	s/\+/ /g;
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;
-	$_ = nkf("-w", $_);
+	$_ = encode("utf8", decode("Guess", $_));
 	s/[\000-\040\+:#?&%<>"\177-\377]/sprintf('%%%02X', unpack('C', $&))/eg;
 	$url .= "/srch/$kind/$_/m$mode"."u/";
 } else {

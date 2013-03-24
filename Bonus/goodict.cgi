@@ -11,7 +11,7 @@ use Encode::Guess qw/euc-jp utf8/;
 #$mode = 0; # substring
 $mode = 1;  # perfect match
 #$mode = 3; # search body text
-$url = "http://dictionary.goo.ne.jp";
+$url = "http://dictionary.goo.ne.jp/";
 $_ = $ENV{"QUERY_STRING"};
 if (/^e:/) {
     $kind = 'ej';
@@ -26,7 +26,7 @@ if ($_) {
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;
 	$_ = encode("utf8", decode("Guess", $_));
 	s/[\000-\040\+:#?&%<>"\177-\377]/sprintf('%%%02X', unpack('C', $&))/eg;
-	$url .= "/srch/$kind/$_/m$mode"."u/";
+	$url .= "srch/$kind/$_/m$mode"."u/";
 } else {
 	$input = "w3m-control: GOTO_LINK";
 }

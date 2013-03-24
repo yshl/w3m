@@ -24,7 +24,7 @@ if ($_) {
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;
 	$_ = nkf("-w", $_);
 	s/[\000-\040\+:#?&%<>"\177-\377]/sprintf('%%%02X', unpack('C', $&))/eg;
-	$url .= "/search.php?MT=$_&kind=$kind&mode=$mode";
+	$url .= "/srch/$kind/$_/m$mode"."u/";
 } else {
 	$input = "w3m-control: GOTO_LINK";
 }

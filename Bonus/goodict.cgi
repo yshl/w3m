@@ -4,13 +4,17 @@
 # e:      file:/cgi-bin/goodict.cgi?%s
 # w:      file:/cgi-bin/goodict.cgi?%s
 # j:      file:/cgi-bin/goodict.cgi?%s
+#
+# e:0:word  start with word
+# e:1:word  perfect match
+# e:2:word  end with word
+# e:3:word  search body text
+# e:6:word  search title
+# e:word    perfect match
 
 use Encode;
 use Encode::Guess qw/euc-jp utf8/;
 
-#$mode = 0; # substring
-$mode = 1;  # perfect match
-#$mode = 3; # search body text
 $url = "http://dictionary.goo.ne.jp/";
 $_ = $ENV{"QUERY_STRING"};
 if (/^e:/) {
@@ -21,6 +25,12 @@ if (/^e:/) {
     $kind = 'jn';
 }
 s@^[ewjs]:@@ && s@^//@@ && s@/$@@;
+if (/^([01236]):/){
+    $mode=$1;
+    s/^[01236]://;
+}else{
+    $mode="1";
+}
 if ($_) {
 	s/\+/ /g;
 	s/%([\da-f][\da-f])/pack('C', hex($1))/egi;

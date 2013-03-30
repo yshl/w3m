@@ -85,7 +85,7 @@ SSL サポートについて
 #
 # certdata2pem.rb
 
-Encoding.default_external="ASCII-8BIT"
+Encoding.default_external="UTF-8"
 while line = $stdin.gets
   next if line =~ /^#/
   next if line =~ /^\s*$/

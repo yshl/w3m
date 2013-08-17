@@ -1705,6 +1705,7 @@ openURL(char *url, ParsedURL *pu, ParsedURL *current,
 		if(schemetable[i].cmd==pu->scheme){
 		    sock = openSocket(pu->host,
 			    schemetable[i].cmdname, pu->port);
+		    break;
 		}
 	    }
 	    if (sock < 0) {

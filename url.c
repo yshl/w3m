@@ -1699,8 +1699,15 @@ openURL(char *url, ParsedURL *pu, ParsedURL *current,
 	    }
 	}
 	else {
-	    sock = openSocket(pu->host,
-			      schemetable[pu->scheme].cmdname, pu->port);
+	    int i;
+	    sock=-1;
+	    for(i=0; schemetable[i].cmdname!=NULL; i++){
+		if(schemetable[i].cmd==pu->scheme){
+		    sock = openSocket(pu->host,
+			    schemetable[i].cmdname, pu->port);
+		    break;
+		}
+	    }
 	    if (sock < 0) {
 		*status = HTST_MISSING;
 		return uf;

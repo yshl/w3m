@@ -30,6 +30,9 @@ extern int do_getch();
 #define getch()	do_getch()
 #endif				/* defined(USE_GPM) || defined(USE_SYSMOUSE) */
 #endif
+#ifdef USE_BINMODE_STREAM
+#include <io.h>
+#endif
 
 #ifdef __MINGW32_VERSION
 #include <winsock.h>
